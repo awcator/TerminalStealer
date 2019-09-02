@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="ProjectQP:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjectQP_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ProjectQP.jar">
+        <element id="module-output" name="ProjectQP" />
+      </element>
+    </root>
+  </artifact>
+</component>
