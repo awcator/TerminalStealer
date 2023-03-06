@@ -1,4 +1,4 @@
-**MuklariTerminalReader**
+**TerminalReader**
 This is a spyware designed to communicate with the intended machine using a third party websites. You can take overcomplete control of the machine
 
 **Targeted OS**
